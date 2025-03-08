@@ -1,0 +1,29 @@
+services:
+  postgres:  # ✅ 이 이름을 기반으로 `docker-compose up -d postgres` 실행해야 함
+    image: postgres:15
+    container_name: fashion_ai_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: nest_project
+      POSTGRES_USER: nest_user
+      POSTGRES_PASSWORD: 5584
+    ports:
+      - "5432:5432"
+    networks:
+      - fashion_ai_network
+
+  backend:
+    build: ./backend
+    container_name: fashion_ai_backend
+    restart: always
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    networks:
+      - fashion_ai_network
+
+networks:
+  fashion_ai_network:
