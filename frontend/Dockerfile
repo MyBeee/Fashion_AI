@@ -11,14 +11,8 @@ RUN npm install
 # 나머지 코드 복사
 COPY . .
 
-# .env 파일 추가
-COPY .env .env
-
-# ⚡ crypto 모듈 활성화 (필요할 경우)
-ENV NODE_OPTIONS="--experimental-global-webcrypto"
-
 # 포트 설정
 EXPOSE 3000
 
-# NestJS 서버 실행
-CMD ["npm", "run", "start"]
+# Next.js 실행
+CMD ["npm", "run", "dev"]

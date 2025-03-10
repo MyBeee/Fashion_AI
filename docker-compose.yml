@@ -1,5 +1,6 @@
 services:
-  postgres:  # ✅ 이 이름을 기반으로 `docker-compose up -d postgres` 실행해야 함
+  # ✅ PostgreSQL 데이터베이스
+  postgres:
     image: postgres:15
     container_name: fashion_ai_postgres
     restart: always
@@ -11,8 +12,11 @@ services:
       - "5432:5432"
     networks:
       - fashion_ai_network
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
-  backend:
+  # ✅ Spring Boot / NestJS 백엔드
+  backend:  # 🚀 여기 들여쓰기 추가!
     build: ./backend
     container_name: fashion_ai_backend
     restart: always
@@ -21,9 +25,41 @@ services:
     env_file:
       - .env
     ports:
-      - "3000:3000"
+      - "8080:8080"  # ✅ 3000 → 8080 변경
     networks:
       - fashion_ai_network
 
+  # ✅ Next.js 프론트엔드
+  frontend:
+    build: ./frontend
+    container_name: fashion_ai_frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "3000:3000"  # Next.js 기본 포트 3000
+    networks:
+      - fashion_ai_network
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+  # ✅ AI 모델 서비스 (Python + TensorFlow)
+  ai-model:
+    build: ./ai-model
+    container_name: fashion_ai_ai_model
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "5000:5000"  # Flask/FastAPI 실행 포트
+    networks:
+      - fashion_ai_network
+    volumes:
+      - ./ai-model:/app
+
 networks:
   fashion_ai_network:
+
+volumes:
+  postgres_data:
