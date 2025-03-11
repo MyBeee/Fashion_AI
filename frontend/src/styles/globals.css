@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ✅ 강제 적용 테스트 */
+body {
+  background-color: #bfdbfe !important; /* Tailwind의 bg-blue-100 색상 */
+}
