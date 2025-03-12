@@ -2,22 +2,115 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ✅ 전체 화면 중앙 정렬 적용 */
+/* ✅ 전체 화면 중앙 정렬 */
 html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #bfdbfe !important; /* Tailwind bg-blue-100 */
+  @apply h-full m-0 p-0 flex items-center justify-center bg-blue-100;
 }
 
-/* ✅ Next.js의 자동 렌더링 컨테이너 정렬 */
-#__next {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100vh;
+/* ✅ 로그인 컨테이너 */
+.login-container {
+  @apply flex items-center justify-center h-screen;
+}
+
+/* ✅ 로그인 박스 */
+.login-box {
+  @apply w-full max-w-lg p-8 bg-white rounded-2xl shadow-xl mx-auto;
+}
+
+/* ✅ 로그인 & 회원가입 탭 */
+.tab-container {
+  @apply flex border-b mb-6;
+}
+
+.tab {
+  @apply w-1/2 text-center p-3 text-gray-500;
+}
+
+.tab.active {
+  @apply font-bold border-b-4 border-blue-600 text-black;
+}
+
+/* ✅ 입력 폼 */
+.input-form {
+  @apply space-y-4;
+}
+
+.input-form input {
+  @apply w-full p-4 mt-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-400;
+}
+
+/* ✅ 로그인 버튼 */
+.login-button {
+  @apply w-full p-4 text-lg text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition;
+}
+
+/* ✅ 자동 로그인 & 정보 찾기 */
+.login-options {
+  @apply flex justify-between items-center mt-4;
+}
+
+.login-options label {
+  @apply flex items-center;
+}
+
+.login-options input {
+  @apply mr-2;
+}
+
+.login-options a {
+  @apply text-blue-500 text-sm hover:underline;
+}
+
+/* ✅ 소셜 로그인 버튼 */
+.social-login {
+  @apply mt-6 space-y-3;
+}
+
+.social-button {
+  @apply flex items-center justify-center w-full h-14 border rounded-lg shadow-md transition;
+}
+
+.google {
+  @apply bg-white hover:bg-gray-100 text-gray-700;
+}
+
+.kakao {
+  @apply bg-yellow-300 hover:bg-yellow-400;
+}
+
+.naver {
+  @apply bg-green-500 hover:bg-green-600 text-white;
+}
+
+/* ✅ 회원가입 페이지 스타일 */
+.signup-container {
+  @apply flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-300 to-blue-500;
+}
+
+.signup-box {
+  @apply w-full max-w-md p-8 bg-white rounded-2xl shadow-xl;
+}
+
+.signup-title {
+  @apply text-3xl font-bold text-center text-blue-700 mb-6;
+}
+
+.signup-form {
+  @apply space-y-4;
+}
+
+.signup-form input {
+  @apply w-full p-3 mt-1 border rounded-lg focus:ring-2 focus:ring-blue-400;
+}
+
+.signup-button {
+  @apply w-full p-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition;
+}
+
+.signup-text {
+  @apply mt-4 text-center text-gray-600;
+}
+
+.signup-link {
+  @apply text-blue-500 hover:underline;
 }
