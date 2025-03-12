@@ -28,10 +28,16 @@ export default function AuthPage() {
                     <div className="mt-6 space-y-4">
                         <input type="email" placeholder="이메일 입력" className="w-full p-3 border rounded-lg" />
                         <input type="password" placeholder="비밀번호 입력" className="w-full p-3 border rounded-lg" />
-                        <button className="w-full p-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600">로그인</button>
-                        <div className="flex items-center">
-                            <input type="checkbox" id="remember" className="mr-2" />
-                            <label htmlFor="remember" className="text-sm">자동 로그인</label>
+                        
+                        {/* 로그인 버튼 */}
+                        <button className="w-full p-3 text-white bg-blue-500 rounded-lg hover:bg-blue-600">
+                            로그인
+                        </button>
+
+                        {/* 자동 로그인 체크박스 (우측 정렬) */}
+                        <div className="flex justify-end mt-2 text-sm text-gray-600">
+                            <input type="checkbox" id="remember" className="mr-1" />
+                            <label htmlFor="remember">자동 로그인</label>
                         </div>
 
                         {/* 소셜 로그인 (컴포넌트 적용) */}
