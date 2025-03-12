@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function SocialLogin() {
   return (
-    <div className="flex flex-col space-y-4 mt-6 w-full max-w-md">
+    <div className="mt-6 w-full max-w-md space-y-3">
       {/* Google 로그인 */}
       <button className="flex items-center justify-center w-full h-14 border rounded-lg shadow-md bg-white hover:bg-gray-100 transition">
         <Image src="/google-logo.png" alt="Google" width={32} height={32} className="flex-shrink-0" />

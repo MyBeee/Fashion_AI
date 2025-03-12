@@ -2,72 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ✅ 전체 화면 중앙 정렬 */
+/* ✅ 전체 화면 중앙 정렬 & 파스텔톤 하늘색 테마 */
 html, body {
-  @apply h-full m-0 p-0 flex items-center justify-center bg-blue-100;
+  @apply h-full flex items-center justify-center bg-blue-100;
 }
 
-/* ✅ 로그인 컨테이너 */
+/* ================================ */
+/* ✅ 로그인 페이지 스타일 */
+/* ================================ */
 .login-container {
-  @apply flex items-center justify-center h-screen;
+  @apply flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-200 to-blue-400;
 }
 
-/* ✅ 로그인 박스 */
 .login-box {
-  @apply w-full max-w-lg p-8 bg-white rounded-2xl shadow-xl mx-auto;
+  @apply w-full max-w-lg p-12 bg-white rounded-3xl shadow-2xl;
 }
 
-/* ✅ 로그인 & 회원가입 탭 */
+.login-title {
+  @apply text-4xl font-bold text-blue-700 text-center mb-6;
+}
+
+/* ✅ 로그인 & 회원가입 탭 크기 조정 */
 .tab-container {
-  @apply flex border-b mb-6;
+  @apply flex justify-between w-full mb-6;
 }
 
 .tab {
-  @apply w-1/2 text-center p-3 text-gray-500;
+  @apply w-1/2 text-center p-4 text-lg font-semibold text-gray-500 border-b-2;
 }
 
 .tab.active {
-  @apply font-bold border-b-4 border-blue-600 text-black;
+  @apply border-blue-600 text-black;
 }
 
-/* ✅ 입력 폼 */
+/* ✅ 로그인 입력 폼 크기 조정 */
 .input-form {
-  @apply space-y-4;
+  @apply w-full space-y-6;
 }
 
 .input-form input {
-  @apply w-full p-4 mt-2 border border-gray-300 rounded-lg text-lg focus:ring-2 focus:ring-blue-400;
+  @apply w-full p-5 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500;
 }
 
 /* ✅ 로그인 버튼 */
 .login-button {
-  @apply w-full p-4 text-lg text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition;
+  @apply w-full p-5 text-lg text-white bg-blue-400 rounded-lg hover:bg-blue-500 transition;
 }
 
-/* ✅ 자동 로그인 & 정보 찾기 */
+/* ✅ 자동 로그인 옵션 위치 조정 */
 .login-options {
-  @apply flex justify-between items-center mt-4;
-}
-
-.login-options label {
-  @apply flex items-center;
+  @apply flex justify-end text-lg text-gray-600 mt-2;
 }
 
 .login-options input {
   @apply mr-2;
 }
 
-.login-options a {
-  @apply text-blue-500 text-sm hover:underline;
+.login-link {
+  @apply text-blue-500 font-semibold hover:underline;
 }
 
-/* ✅ 소셜 로그인 버튼 */
+/* ✅ 소셜 로그인 버튼 크기 통일 */
 .social-login {
-  @apply mt-6 space-y-3;
+  @apply mt-6 space-y-4;
 }
 
 .social-button {
-  @apply flex items-center justify-center w-full h-14 border rounded-lg shadow-md transition;
+  @apply flex items-center justify-center w-full p-5 border rounded-lg shadow-md text-lg font-medium;
 }
 
 .google {
@@ -82,35 +83,40 @@ html, body {
   @apply bg-green-500 hover:bg-green-600 text-white;
 }
 
+/* ================================ */
 /* ✅ 회원가입 페이지 스타일 */
+/* ================================ */
 .signup-container {
   @apply flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-300 to-blue-500;
 }
 
 .signup-box {
-  @apply w-full max-w-md p-8 bg-white rounded-2xl shadow-xl;
+  @apply w-full max-w-xl p-14 bg-white rounded-3xl shadow-2xl;
 }
 
 .signup-title {
-  @apply text-3xl font-bold text-center text-blue-700 mb-6;
+  @apply text-4xl font-bold text-blue-700 text-center mb-8;
 }
 
+/* ✅ 회원가입 폼 크기 조정 */
 .signup-form {
-  @apply space-y-4;
+  @apply w-full space-y-6;
 }
 
 .signup-form input {
-  @apply w-full p-3 mt-1 border rounded-lg focus:ring-2 focus:ring-blue-400;
+  @apply w-full p-5 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500;
 }
 
+/* ✅ 회원가입 버튼 크기 통일 */
 .signup-button {
-  @apply w-full p-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition;
+  @apply w-full p-5 text-lg text-white bg-blue-400 rounded-lg hover:bg-blue-500 transition;
 }
 
+/* ✅ 회원가입 안내 텍스트 위치 조정 */
 .signup-text {
-  @apply mt-4 text-center text-gray-600;
+  @apply mt-4 text-lg text-gray-600 text-right;
 }
 
 .signup-link {
-  @apply text-blue-500 hover:underline;
+  @apply text-blue-500 font-semibold hover:underline;
 }

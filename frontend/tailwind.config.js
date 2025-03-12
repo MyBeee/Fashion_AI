@@ -3,11 +3,10 @@ module.exports = {
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
     "./app/**/*.{js,ts,jsx,tsx}",
-    "./src/styles/**/*.css",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./styles/**/*.css",
   ],
-  safelist: [
-    "bg-blue-100" // ✅ 강제로 Tailwind에서 삭제되지 않도록 설정
-  ],
+  safelist: ["bg-blue-100"], // ✅ 강제로 유지할 스타일
   theme: {
     extend: {},
   },
