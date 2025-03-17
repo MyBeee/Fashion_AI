@@ -4,119 +4,97 @@
 
 /* ✅ 전체 화면 중앙 정렬 & 파스텔톤 하늘색 테마 */
 html, body {
-  @apply h-full flex items-center justify-center bg-blue-100;
+  @apply h-full flex items-center justify-center;
+  background-color: #bfdbfe !important; /* Tailwind의 blue-200 색상 강제 적용 */
 }
 
-/* ================================ */
-/* ✅ 로그인 페이지 스타일 */
-/* ================================ */
-.login-container {
-  @apply flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-200 to-blue-400;
+/* ✅ 로그인 & 회원가입 공통 스타일 */
+.auth-container {
+  @apply flex flex-col items-center justify-center min-h-screen bg-blue-200;
 }
 
-.login-box {
-  @apply w-full max-w-lg p-12 bg-white rounded-3xl shadow-2xl;
+/* ✅ 로그인 박스 크기 및 여백 조정 */
+.auth-box {
+  @apply w-full max-w-md p-6 bg-blue-200 rounded-lg flex flex-col items-center;
 }
 
-.login-title {
-  @apply text-4xl font-bold text-blue-700 text-center mb-6;
+/* ✅ 로고 */
+.auth-logo {
+  @apply flex justify-center mb-4;
 }
 
-/* ✅ 로그인 & 회원가입 탭 크기 조정 */
-.tab-container {
-  @apply flex justify-between w-full mb-6;
+.logo-img {
+  @apply w-28 h-auto; /* 기존 32px → 28px로 줄임 */
+  mix-blend-mode: multiply;
+  background-color: transparent;
 }
 
-.tab {
-  @apply w-1/2 text-center p-4 text-lg font-semibold text-gray-500 border-b-2;
+/* ✅ 안내 문구 */
+.auth-description {
+  @apply text-gray-700 text-center text-lg mb-4;
 }
 
-.tab.active {
-  @apply border-blue-600 text-black;
+/* ✅ 입력 필드 크기 축소 */
+.input-container {
+  @apply w-full space-y-2;
 }
 
-/* ✅ 로그인 입력 폼 크기 조정 */
-.input-form {
-  @apply w-full space-y-6;
+.input-field {
+  @apply w-full p-3 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500;
 }
 
-.input-form input {
-  @apply w-full p-5 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500;
+/* ✅ 체크박스 */
+.checkbox-container {
+  @apply flex justify-between w-full text-sm text-gray-700 mt-2;
 }
 
-/* ✅ 로그인 버튼 */
-.login-button {
-  @apply w-full p-5 text-lg text-white bg-blue-400 rounded-lg hover:bg-blue-500 transition;
+/* ✅ 로그인 버튼 크기 조정 */
+.auth-button {
+  @apply w-full py-3 text-lg text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition mt-3;
 }
 
-/* ✅ 자동 로그인 옵션 위치 조정 */
-.login-options {
-  @apply flex justify-end text-lg text-gray-600 mt-2;
+/* ✅ 구분선 */
+.divider {
+  @apply text-gray-500 text-sm my-3;
 }
 
-.login-options input {
-  @apply mr-2;
-}
-
-.login-link {
-  @apply text-blue-500 font-semibold hover:underline;
-}
-
-/* ✅ 소셜 로그인 버튼 크기 통일 */
+/* ✅ 소셜 로그인 버튼 그룹 */
 .social-login {
-  @apply mt-6 space-y-4;
+  @apply flex justify-center space-x-3 mt-3;
 }
 
+/* ✅ 소셜 로그인 버튼 크기 및 테두리 스타일 */
 .social-button {
-  @apply flex items-center justify-center w-full p-5 border rounded-lg shadow-md text-lg font-medium;
+  @apply flex items-center justify-center w-12 h-12 rounded-full shadow-md;
 }
 
+/* ✅ 개별 버튼 배경색 */
 .google {
-  @apply bg-white hover:bg-gray-100 text-gray-700;
+  @apply bg-white text-gray-700 border border-gray-300;
 }
 
 .kakao {
-  @apply bg-yellow-300 hover:bg-yellow-400;
+  @apply bg-yellow-300;
 }
 
 .naver {
-  @apply bg-green-500 hover:bg-green-600 text-white;
+  @apply bg-green-500 text-white;
 }
 
-/* ================================ */
-/* ✅ 회원가입 페이지 스타일 */
-/* ================================ */
-.signup-container {
-  @apply flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-300 to-blue-500;
+.twitch {
+  @apply bg-purple-500 text-white;
 }
 
-.signup-box {
-  @apply w-full max-w-xl p-14 bg-white rounded-3xl shadow-2xl;
+.apple {
+  @apply bg-black text-white;
 }
 
-.signup-title {
-  @apply text-4xl font-bold text-blue-700 text-center mb-8;
+/* ✅ 하단 링크 */
+.bottom-links {
+  @apply flex space-x-3 text-gray-700 text-sm mt-3;
 }
 
-/* ✅ 회원가입 폼 크기 조정 */
-.signup-form {
-  @apply w-full space-y-6;
-}
-
-.signup-form input {
-  @apply w-full p-5 text-lg border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500;
-}
-
-/* ✅ 회원가입 버튼 크기 통일 */
-.signup-button {
-  @apply w-full p-5 text-lg text-white bg-blue-400 rounded-lg hover:bg-blue-500 transition;
-}
-
-/* ✅ 회원가입 안내 텍스트 위치 조정 */
-.signup-text {
-  @apply mt-4 text-lg text-gray-600 text-right;
-}
-
-.signup-link {
-  @apply text-blue-500 font-semibold hover:underline;
+/* ✅ 푸터 */
+.footer {
+  @apply text-gray-600 text-sm text-center mt-6;
 }

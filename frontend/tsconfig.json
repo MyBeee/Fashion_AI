@@ -18,9 +18,8 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"]   // ✅ components 경로 추가
     },
     "plugins": [
       {
