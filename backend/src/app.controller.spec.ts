@@ -1,11 +1,20 @@
-ts
-복사편집
-import { Controller, Get } from '@nestjs/common';
+import { Test, TestingModule } from '@nestjs/testing';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
-@Controller('recommendations')
-export class RecommendationController {
-  @Get()
-  getRecommendations() {
-    return { message: "추천 패션 아이템 리스트" };
-  }
-}
+describe('AppController', () => {
+  let appController: AppController;
+
+  beforeEach(async () => {
+    const app: TestingModule = await Test.createTestingModule({
+      controllers: [AppController],
+      providers: [AppService],
+    }).compile();
+
+    appController = app.get<AppController>(AppController);
+  });
+
+  it('should return "Hello World!"', () => {
+    expect(appController.getHello()).toBe('Hello World!');
+  });
+});
