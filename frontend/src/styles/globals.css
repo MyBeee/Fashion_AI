@@ -8,13 +8,17 @@ html, body {
   background-color: #bfdbfe !important; /* Tailwind의 blue-200 색상 강제 적용 */
 }
 
-/* ✅ 로그인 & 회원가입 공통 스타일 */
+/* ✅ 로그인 & 회원가입 컨테이너 */
 .auth-container {
   @apply flex flex-col items-center justify-center min-h-screen bg-blue-200;
 }
 
-/* ✅ 로그인 박스 크기 및 여백 조정 */
-.auth-box {
+/* ✅ 로그인 & 회원가입 박스 */
+.login-box {
+  @apply w-full max-w-md p-6 bg-blue-200 rounded-lg flex flex-col items-center;
+}
+
+.signup-box {
   @apply w-full max-w-md p-6 bg-blue-200 rounded-lg flex flex-col items-center;
 }
 
@@ -24,9 +28,7 @@ html, body {
 }
 
 .logo-img {
-  @apply w-28 h-auto; /* 기존 32px → 28px로 줄임 */
-  mix-blend-mode: multiply;
-  background-color: transparent;
+  @apply w-28 h-auto;
 }
 
 /* ✅ 안내 문구 */
@@ -34,9 +36,9 @@ html, body {
   @apply text-gray-700 text-center text-lg mb-4;
 }
 
-/* ✅ 입력 필드 크기 축소 */
+/* ✅ 로그인 입력 필드 */
 .input-container {
-  @apply w-full space-y-2;
+  @apply w-full py-2.5 space-y-2;
 }
 
 .input-field {
@@ -48,45 +50,59 @@ html, body {
   @apply flex justify-between w-full text-sm text-gray-700 mt-2;
 }
 
-/* ✅ 로그인 버튼 크기 조정 */
+/* ✅ 로그인 버튼 */
 .auth-button {
-  @apply w-full py-3 text-lg text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition mt-3;
+  @apply w-full py-3 text-lg text-white bg-blue-500 rounded-lg mb-4;
 }
 
-/* ✅ 구분선 */
+/* ✅ 간편회원가입 구분선 */
 .divider {
   @apply text-gray-500 text-sm my-3;
 }
 
-/* ✅ 소셜 로그인 버튼 그룹 */
+/* ✅ 로그인 페이지 전용 소셜 버튼 */
 .social-login {
   @apply flex justify-center space-x-3 mt-3;
 }
 
-/* ✅ 소셜 로그인 버튼 크기 및 테두리 스타일 */
-.social-button {
+.social-login-button {
   @apply flex items-center justify-center w-12 h-12 rounded-full shadow-md;
 }
 
-/* ✅ 개별 버튼 배경색 */
-.google {
-  @apply bg-white text-gray-700 border border-gray-300;
+/* ✅ 회원가입 페이지 전용 소셜 버튼 */
+.social-signup {
+  @apply flex flex-col space-y-3 w-full;
+}
+
+/* ✅ 소셜 회원가입 버튼 */
+.social-signup-button {
+  @apply flex items-center w-full py-2.5 text-lg text-white rounded-lg shadow-md pl-5 relative;
+}
+
+/* ✅ 소셜 아이콘 크기 및 정렬 */
+.social-icon {
+  @apply w-12 h-12 absolute left-5;
+}
+
+.social-text {
+  @apply flex-1 text-center;
+}
+
+/* ✅ 개별 소셜 버튼 색상 */
+.twitch {
+  @apply bg-purple-500;
+}
+
+.naver {
+  @apply bg-green-500;
 }
 
 .kakao {
   @apply bg-yellow-300;
 }
 
-.naver {
-  @apply bg-green-500 text-white;
-}
-
-.twitch {
-  @apply bg-purple-500 text-white;
-}
-
 .apple {
-  @apply bg-black text-white;
+  @apply bg-black;
 }
 
 /* ✅ 하단 링크 */
@@ -94,7 +110,6 @@ html, body {
   @apply flex space-x-3 text-gray-700 text-sm mt-3;
 }
 
-/* ✅ 푸터 */
-.footer {
-  @apply text-gray-600 text-sm text-center mt-6;
+.signup-button {
+  @apply w-full py-3 text-lg text-white bg-blue-500 rounded-lg;
 }
