@@ -1,6 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-@Entity() // <-- @Entity 데코레이터 확인!
+@Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;

@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
-import { UsersModule } from '../users/users.module'; // ✅ UsersModule을 가져옴
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from '../entities/user.entity';
 
 @Module({
-  imports: [UsersModule], // ✅ UsersModule이 있어야 UserService를 사용할 수 있음
+  imports: [TypeOrmModule.forFeature([User])], // ✅ User 엔티티 포함
   providers: [AuthService],
-  controllers: [AuthController],
+  controllers: [AuthController], // ✅ 컨트롤러 등록 확인!
   exports: [AuthService],
 })
 export class AuthModule {}

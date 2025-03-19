@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { User } from '../entities/user.entity';  // ✅ User 엔티티 명시적 등록
 
 @Module({
   imports: [
@@ -18,9 +19,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: configService.get<string>('DB_USERNAME', 'postgres'),
         password: configService.get<string>('DB_PASSWORD', '5584'),
         database: configService.get<string>('DB_NAME', 'nest_project'),
-        autoLoadEntities: true,
-        synchronize: configService.get<string>('NODE_ENV') !== 'production',
-        logging: configService.get<string>('NODE_ENV') !== 'production',
+        entities: [User],  // ✅ 엔티티 명시적으로 등록
+        autoLoadEntities: true, 
+        synchronize: true,  // ✅ 자동 테이블 생성 강제 활성화
+        logging: true,  // ✅ SQL 로그 활성화
       }),
     }),
   ],
