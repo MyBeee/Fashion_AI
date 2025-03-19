@@ -8,9 +8,16 @@ export class User {
   @Column()
   name: string;
 
-  @Column({ unique: true })
+  @Column()
   email: string;
 
   @Column()
   password: string;
+
+  constructor() {
+    this.id = 0;
+    this.name = '';
+    this.email = '';
+    this.password = '';
+  }
 }
