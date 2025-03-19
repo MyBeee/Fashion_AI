@@ -3,8 +3,10 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
-import { UsersModule } from './users/users.module';  // ✅ 상대 경로 사용
-import { AuthModule } from './auth/auth.module';    // ✅ 상대 경로 사용
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
@@ -13,8 +15,13 @@ import { AuthModule } from './auth/auth.module';    // ✅ 상대 경로 사용
       envFilePath: '.env',
     }),
     DatabaseModule,
-    UsersModule,  // ✅ UserRepository 사용 가능
-    AuthModule,   // ✅ 로그인 & 회원가입 기능 사용 가능
+    UsersModule,
+    AuthModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.register({
+      secret: process.env.JWT_SECRET || 'mysecretkey', // .env 파일에서 JWT_SECRET 가져오기
+      signOptions: { expiresIn: '1h' }, // JWT 토큰 유효기간 설정
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,24 +1,29 @@
-# Node.js 18 기반 이미지 사용
-FROM node:18
+# ✅ 1. 가벼운 Node.js 20 버전 사용
+FROM node:20-alpine
 
-# 작업 디렉토리 설정
+# ✅ 2. 작업 디렉토리 설정
 WORKDIR /app
 
-# package.json 및 package-lock.json 복사 후 설치
+# ✅ 3. package.json 및 package-lock.json 먼저 복사 (캐싱 최적화)
 COPY package*.json ./
+
+# ✅ 4. TypeScript, Node.js 패키지 설치
 RUN npm install
 
-# 나머지 코드 복사
+# ✅ 5. 나머지 모든 코드 복사
 COPY . .
 
-# .env 파일 추가
+# ✅ 6. 환경 변수 파일 추가
 COPY .env .env
 
-# ⚡ crypto 모듈 활성화 (필요할 경우)
-ENV NODE_OPTIONS="--experimental-global-webcrypto"
+# ✅ 7. TypeScript 빌드 실행 (🚨 dist/main.js가 생성되는지 확인)
+RUN npm run build && ls -al dist/
 
-# 포트 설정
+# ✅ 8. 실행 권한 변경 제거 (필요 없음)
+# RUN chmod +x ./dist/main.js  🚨 필요 없음
+
+# ✅ 9. 포트 개방
 EXPOSE 3000
 
-# NestJS 서버 실행
-CMD ["npm", "run", "start"]
+# ✅ 10. 컨테이너 실행 시 서버 시작
+CMD ["node", "dist/main.js"]

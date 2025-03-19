@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       POSTGRES_DB: nest_project
-      POSTGRES_USER: nest_user
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 5584
     ports:
       - "5432:5432"
@@ -14,18 +14,24 @@ services:
       - fashion_ai_network
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   # ✅ Spring Boot / NestJS 백엔드
-  backend:  # 🚀 여기 들여쓰기 추가!
+  backend:
     build: ./backend
     container_name: fashion_ai_backend
     restart: always
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy  # ✅ PostgreSQL이 완전히 실행된 후 시작
     env_file:
-      - .env
+      - .env  # ✅ .env 파일에서 환경 변수 로드
     ports:
-      - "8080:8080"  # ✅ 3000 → 8080 변경
+      - "8080:8080"
     networks:
       - fashion_ai_network
 
