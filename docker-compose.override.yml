@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  backend:
+    environment:
+      - DB_HOST=fashion_ai_postgres
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=5584
+      - DB_NAME=nest_project
+      - NODE_ENV=development
+      - JWT_SECRET=mySuperSecretKey

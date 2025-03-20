@@ -12,11 +12,11 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "baseUrl": "./",
-    "paths": {
-      "@users/*": ["src/users/*"],
-      "@auth/*": ["src/auth/*"],
-      "@database/*": ["src/database/*"]
-    },
+  "paths": {
+    "@users/*": ["src/users/*"],
+    "@auth/*": ["src/auth/*"],
+    "@database/*": ["src/database/*"]
+  },
     "incremental": true,
     "skipLibCheck": true,
     "strict": true,

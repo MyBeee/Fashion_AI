@@ -20,16 +20,21 @@ services:
       timeout: 5s
       retries: 5
 
-  # ✅ Spring Boot / NestJS 백엔드
   backend:
     build: ./backend
     container_name: fashion_ai_backend
     restart: always
     depends_on:
       postgres:
-        condition: service_healthy  # ✅ PostgreSQL이 완전히 실행된 후 시작
-    env_file:
-      - .env  # ✅ .env 파일에서 환경 변수 로드
+        condition: service_healthy
+    environment:
+      DB_HOST: fashion_ai_postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: 5584
+      DB_NAME: nest_project
+      NODE_ENV: development
+      JWT_SECRET: mySuperSecretKey
     ports:
       - "8080:8080"
     networks:

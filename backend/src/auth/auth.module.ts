@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../entities/user.entity';
+import { UsersModule } from '../users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './jwt.strategy';
@@ -21,6 +22,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         signOptions: { expiresIn: '1h' }, // ✅ 토큰 만료시간 1시간
       }),
     }),
+    UsersModule,
   ],
   providers: [AuthService, JwtStrategy], // ✅ JWT 전략 추가
   controllers: [AuthController], // ✅ 컨트롤러 등록

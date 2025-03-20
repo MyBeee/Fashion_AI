@@ -1,38 +1,28 @@
 import { Injectable, UnauthorizedException, NotFoundException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { User } from '../entities/user.entity';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { UserService } from '@users/users.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
-    private jwtService: JwtService, // ✅ JWT 서비스 추가
+    private userService: UserService,
+    private jwtService: JwtService,
   ) {}
 
-  // ✅ 회원가입 기능 (비밀번호 해싱 포함)
+  // ✅ 회원가입 기능
   async createUser(name: string, email: string, password: string) {
-    // 이메일 중복 검사
-    const existingUser = await this.userRepository.findOne({ where: { email } });
+    const existingUser = await this.userService.findUserByEmail(email);
     if (existingUser) {
       return { error: '이미 존재하는 이메일입니다.' };
     }
 
-    // 🔒 강력한 해싱 적용 (bcrypt의 saltRounds 증가)
+    // 🔒 비밀번호 해싱
     const saltRounds = 12;
     const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    // 새로운 유저 생성
-    const newUser = this.userRepository.create({
-      name,
-      email,
-      password: hashedPassword, // ✅ 암호화된 비밀번호 저장
-    });
-
-    await this.userRepository.save(newUser);
+    // 사용자 생성
+    const newUser = await this.userService.createUser(name, email, hashedPassword);
 
     return {
       message: '회원가입 성공!',
@@ -44,9 +34,9 @@ export class AuthService {
     };
   }
 
-  // ✅ 최적화된 로그인 함수
+  // ✅ 로그인 기능
   async login(email: string, password: string) {
-    const user = await this.userRepository.findOne({ where: { email } });
+    const user = await this.userService.findUserByEmail(email);
     if (!user) {
       throw new UnauthorizedException('이메일 또는 비밀번호가 틀렸습니다.');
     }
@@ -57,15 +47,14 @@ export class AuthService {
       throw new UnauthorizedException('이메일 또는 비밀번호가 틀렸습니다.');
     }
 
-    // ✅ JWT 액세스 토큰 & 리프레시 토큰 발급
+    // ✅ JWT 발급
     const payload = { email: user.email, sub: user.id };
     const accessToken = this.jwtService.sign(payload, { expiresIn: '1h' });
     const refreshToken = this.jwtService.sign(payload, { expiresIn: '7d' });
 
-    // ✅ **응답 구조 수정** (중첩 제거)
     return {
       message: '로그인 성공!',
-      access_token: accessToken, // ✅ JWT 토큰을 직접 반환
+      access_token: accessToken,
       refresh_token: refreshToken,
       user: {
         id: user.id,
@@ -74,11 +63,10 @@ export class AuthService {
       },
     };
   }
-  
 
   // ✅ 비밀번호 변경 기능
   async changePassword(userId: number, oldPassword: string, newPassword: string) {
-    const user = await this.userRepository.findOne({ where: { id: userId } });
+    const user = await this.userService.findUserById(userId);
     if (!user) {
       throw new NotFoundException('사용자를 찾을 수 없습니다.');
     }
@@ -91,20 +79,14 @@ export class AuthService {
 
     // ✅ 새로운 비밀번호 암호화 후 저장
     const hashedPassword = await bcrypt.hash(newPassword, 12);
-    user.password = hashedPassword;
-    await this.userRepository.save(user);
+    await this.userService.updateUserPassword(userId, hashedPassword);
 
     return { message: '비밀번호 변경 성공!' };
   }
 
   // ✅ 사용자 삭제 (회원 탈퇴)
   async deleteUser(userId: number) {
-    const user = await this.userRepository.findOne({ where: { id: userId } });
-    if (!user) {
-      throw new NotFoundException('사용자를 찾을 수 없습니다.');
-    }
-
-    await this.userRepository.remove(user);
+    await this.userService.deleteUser(userId);
     return { message: '회원 탈퇴 성공!' };
   }
 
@@ -120,7 +102,7 @@ export class AuthService {
 
   // ✅ 사용자 정보 가져오기
   async getUserById(userId: number) {
-    const user = await this.userRepository.findOne({ where: { id: userId } });
+    const user = await this.userService.findUserById(userId);
     if (!user) {
       throw new NotFoundException('사용자를 찾을 수 없습니다.');
     }
